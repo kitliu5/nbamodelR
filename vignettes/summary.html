@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Alexander Stroud and Tianchi Liu" />
+
+<meta name="date" content="2018-03-20" />
+
+<title>NBA Season and Playoff Series Results Predictions</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">NBA Season and Playoff Series Results Predictions</h1>
+<h4 class="author"><em>Alexander Stroud and Tianchi Liu</em></h4>
+<h4 class="date"><em>March 20, 2018</em></h4>
+
+
+
+<div id="motivation-nba-team-analytics" class="section level2">
+<h2>Motivation: NBA Team Analytics</h2>
+<p>As the 2018 NBA postseason draws closer and top NBA teams start to clinch playoff spots, interests in forecasting which team will find the most success in the postseason have been elevating. Once the regular season ends and playoff matchups are finalized, direct team-to-team comparison and projection of playoff series outcomes will be interesting to various groups of people, such as sports analysts, bettors, and basketball fans at large. While fans will always enjoy subjective arguments regarding the merits of one team compared to another, there is also a place for statistical analysis in this discussion. It is in this place where nbamodelR is most useful.</p>
+<p>The nbamodelR package gives users the ability to perform their own analyses of NBA teams. It does so by providing easy access to various types of NBA data, including game logs containing records of each individual game played, and season summary statistics for each team, averaged per game, per 100 possessions, or totaled up. Often, easy access to data is the largest barrier to performing a statistical analysis, so by providing an easy way to gather data, we are hopefully opening the door for future analysts. The data that can be scraped using our package comes from three sources: Basketball-Reference.com, stats.nba.com, and FiveThirtyEight.com, so even if one of those sites changes their data format or their data access policy, nbamodelR will still have data-collecting functionality.</p>
+<p>Users can take data extracted with nbamodelR and use it to perform their own analyses. In case they are unsure where to start, however, nbamodelR provides functions to model NBA team skill, using FiveThirtyEight’s Elo rating system, or a Bradley-Terry model. Once these models are built, nbamodelR makes team comparisons easy, as it includes a function to forecast playoff series outcomes given the results from its modeling functions. Additionally, it provides a function to estimate team win totals over a full 82-game season, to give an idea of the “true talent” of each team.</p>
+<p>The package’s only minor deviation from its proposal is that users will not have the flexibility of choosing which features to emphasize while modeling matchup results. This is mainly due to the fact that both the Elo rating system and Bradley-Terry model have been successful models for different kinds of sports analytics, and these models do not depend on a wide array of features. Additionally, R by default allows for easy creation of basic linear models with user-specified features, and we thought it would be less useful to write a function that was simply a glorified wrapper for stats::lm.</p>
+</div>
+<div id="evaluating-teams-bradley-terry" class="section level2">
+<h2>Evaluating Teams: Bradley-Terry</h2>
+<div id="scraping-data" class="section level3">
+<h3>Scraping data</h3>
+<p>For users who are interested in inspecting individual game records, <strong>getGameLogs</strong> can be used to extract team statistics in each game from stats.NBA.com. The range of seasons covered can be specified with “from” and “to” arguments, and the argument “type” specifies whether playoff or regular season records are scraped from the website. Note that default value of the argument “to” is the same as “from”, so that single season statistics are extracted when the argument “to” is not specified. The argument “simple” is FALSE by default so that all types of game statistics for both home and away teams are collected. If the argument “simple” is set to TRUE, then the extracted dataset will only contain the following variables: Game_ID, GAME_DATE, H.TEAM, A.TEAM, H.PTS, A.PTS. H stands for the home team, and A for the away team. Two of the options for collecting game logs are presented below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gamelogs2017_full =<span class="st"> </span><span class="kw">getGameLogs</span>(<span class="dt">from =</span> <span class="dv">2017</span>, <span class="dt">type =</span> <span class="st">&quot;Regular Season&quot;</span>)
+gamelogs2016to2017_simple =<span class="st"> </span><span class="kw">getGameLogs</span>(<span class="dt">from =</span> <span class="dv">2016</span>, <span class="dt">to =</span> <span class="dv">2017</span>, <span class="dt">type =</span> <span class="st">&quot;Regular Season&quot;</span>, <span class="dt">simple=</span><span class="ot">TRUE</span>)</code></pre></div>
+</div>
+<div id="building-a-model" class="section level3">
+<h3>Building a Model</h3>
+<p>Once these game logs are collected, we turn to predicting game results. The Bradley-Terry model is implemented here for estimating point differential and winning probabilities in a matchup. It predicts the point differential <span class="math inline">\(S_i\)</span> in a matchup between home team <span class="math inline">\(H_i\)</span> and away team <span class="math inline">\(A_i\)</span> as: <span class="math display">\[S_i = \alpha + \beta_{H_i} - \beta_{A_i} + \epsilon_i\]</span> where <span class="math inline">\(\alpha\)</span> is a constant accounting for home court advantage, <span class="math inline">\(\beta_{H_i}\)</span> and <span class="math inline">\(\beta_{A_i}\)</span> are estimated “strengths”&quot; of home and away teams, and <span class="math inline">\(\epsilon_i\)</span> is random noise in the model that follows: <span class="math display">\[\epsilon_i\sim\mathcal N(0, \sigma^2)\]</span> Team strength and coefficient of home court advantage can be estimated using matrix method in which <span class="math inline">\(\beta = \begin{bmatrix}\alpha \\ \beta_1\\ \beta_2\\ ... \\ \beta_p \end{bmatrix}\)</span>, <span class="math inline">\(Y = \begin{bmatrix}S_1 \\ S_2 \\ S_3 \\ ... \\ S_n \end{bmatrix}\)</span> and <span class="math inline">\(X = \begin{bmatrix}1 &amp;X_{12} &amp; X_{13} &amp; ... &amp;X_{1p} \\ 1 &amp;X_{22} &amp; X_{23} &amp; ... &amp; X_{2p} \\ ... &amp; ... &amp; ... &amp; ... &amp; ... \\ 1 &amp; X_{n2} &amp; X_{n3} &amp; ... &amp; X_{np} \end{bmatrix}\)</span>, where <span class="math inline">\(X_{ij} = 1\)</span> if the i-th home team is Team j-1, <span class="math inline">\(X_{ij} = -1\)</span> if the i-th away team is Team j-1, and 0 otherwise. With a regularization term added to the model, the vector <span class="math inline">\(\beta\)</span> can be determined using <span class="math inline">\(\widehat{\beta_\lambda} = (X^TX+\lambda I)^{-1}X^TY\)</span> for some regularization coefficient <span class="math inline">\(\lambda &gt; 0\)</span>. Finally, estimated point differential in a matchup between certain home and away teams is <span class="math inline">\(\widehat{S} = \widehat{\alpha} + \widehat{\beta_H} - \widehat{\beta_A}\)</span></p>
+<p>The above computation for point differential can be easily implemented using the <strong>buildPtDiffMatrixBT</strong> function in the package. It estimates team strength based on the inputted data frame of game logs, and then returns an estimated point differential matrix containing all possible matchups between teams included in the game logs. The regularization term is included by default, but can also be omitted. For example, the following command uses the regularized Bradley-Terry model and returns a point differential matrix with all possible matchups between NBA teams in 2017.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">btPointDiffs =<span class="st"> </span><span class="kw">buildPtDiffMatrixBT</span>(gamelogs2017_full)</code></pre></div>
+<p>The Bradley-Terry model can also be used to estimate winning probabilities in a matchup according to: <span class="math display">\[p_i = \frac{exp(\alpha +\beta_{H}-\beta_A)}{1+exp(\alpha +\beta_{H}-\beta_A)}\]</span> It estimates the probability of the home team defeating the away team based on their “strengths” that are estimated using the method described above. In this package, <strong>buildWinProbMatrixBT</strong> takes a game log dataset and returns a winning probability matrix in which each entry represents the probability of the team in that row defeating the team in that column.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">btWinProb =<span class="st"> </span><span class="kw">buildWinProbMatrixBT</span>(gamelogs2017_full)</code></pre></div>
+<p>For easier access to point differential matrix and winning probability matrix described above, one can use the <strong>buildModelsBT</strong> function, which takes a game log dataset and returns a list with both the winning probability (winProb) matrix and the point differential (pointDiff) matrix as the first and second elements of the list, respectively. The example below again uses <strong>gamelogs2017_full</strong>, but returns a list containing the results from previous two examples:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">btList =<span class="st"> </span><span class="kw">buildModelsBT</span>(gamelogs2017_full)</code></pre></div>
+</div>
+</div>
+<div id="evaluating-teams-elo" class="section level2">
+<h2>Evaluating Teams: Elo</h2>
+<p>Another commonly used technique for modeling sports game outcomes is the Elo rating system. It is developed by Hungarian-American physicist Arpad Elo and it was originally implemented as a chess rating system. The difference in Elo ratings between two competitors in a matchup can be used to predict game outcomes, and teams’ Elo rating will either increase or decrease depending on the game result. A winning team will always take points from the losing team, and the amount of points transferred is determined by the difference in ratings between the two teams. If a high-rated team beats a low-rated team, only a few points will be transferred, whereas many points will be transferred if a low-rated team beats a high-rated team. Therefore, an Elo model is largely self-correcting, as teams incorrectly ranked too low will gain points rapidly, and teams incorrectly ranked too high will lose points just as quickly.</p>
+<p>Due to its ability to quickly respond to changes in team skill, and its excellence in estimating relative skill levels of players in zero-sum games such as chess, it has been widely applied in different kind of sports, including basketball.</p>
+<div id="gathering-data" class="section level3">
+<h3>Gathering Data</h3>
+<p>FiveThirtyEight.com uses either pure Elo or Elo-based ratings systems to evaluate team skill in a wide array of sports, including the NBA. Fortunately for us, they maintain a publically available, continuously updated dataset of every game in NBA and ABA history, along with the pre- and post-game Elo ratings of the teams in each game. The function <strong>getEloGameLogs</strong> extracts this history of Elo ratings, potentially for the entire history of the NBA and ABA, if desired. These Elo-based game logs for a specific range of seasons or for one particular year can also be extracted by specifying the “from” and “to” aguments in the function. Such game logs can then be used for further modeling using the Elo rating system.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eloLogsAll =<span class="st"> </span><span class="kw">getEloGameLogs</span>()
+eloLogs2017 =<span class="st"> </span><span class="kw">getEloGameLogs</span>(<span class="dv">2017</span>)
+eloLogsFrom2000 =<span class="st"> </span><span class="kw">getEloGameLogs</span>(<span class="dv">2000</span>, <span class="dv">2017</span>)</code></pre></div>
+</div>
+<div id="building-a-model-1" class="section level3">
+<h3>Building a Model</h3>
+<p>Once these Elo-based game logs are extracted using <strong>getEloGameLogs</strong>, we turn to evaluating the individual teams. In Elo models, all that matters for predicting the outcome of a matchup is the difference in Elo rating of the two participants. However, to calculate this difference, we must first know each team’s Elo rating. Fortunately, nbamodelR supplies the function <strong>extractTeamElos</strong>, which takes a data frame with Elo game logs and returns Elo ratings of all teams at the end of a specified season. The following example extracts Elo ratings of all teams in 2017:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">elos2017 =<span class="st"> </span><span class="kw">extractTeamElos</span>(eloLogsAll, <span class="dv">2017</span>)
+<span class="kw">head</span>(elos2017)</code></pre></div>
+<p>Once these ratings are obtained, users will have an estimate of teams’ strengths relative to one another. However, they can also use nbamodelR to build Elo-based winning probability and point differential matrices that are structured in the same way as those estimated by the Bradley-Terry model. For building the winning probability matrix, each home team’s chance of winning visiting team can be modeled using logistic regression, in which the binary variable game result (+1 for home team wins, 0 for home team losses) is regressed onto the difference in elo ratings of the two teams (always home elo - away elo). The point differential can be modeled by regressing the score difference (home score - away score) onto the difference in elo ratings of the two teams.</p>
+<p>Winning probability and point differential matrices of a particular season can be built based on Elo-based game logs using <strong>buildWinProbMatrixElo</strong> and <strong>buildPtDiffMatrixElo</strong>, respectively. As with the Bradley-Terry matrices, each entry represents the probability of the team in that row at home defeating the team in that column, or the point differential in a matchup between the team in that row at home against the team in that column. An example for computing these matrices is shown below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eloWinProb =<span class="st"> </span><span class="kw">buildWinProbMatrixElo</span>(eloLogsAll, <span class="dv">2017</span>)
+eloPointDiffs =<span class="st"> </span><span class="kw">buildPtDiffMatrixElo</span>(eloLogsAll, <span class="dv">2017</span>)</code></pre></div>
+<p>For easier access to both matrices, one can use the function <strong>buildModelsElo</strong> which also takes an eloLogs dataset and returns both matrices for a specified season as a list. The list’s first element is winning probability matrix and the second element is point differential matrix, as with the Bradley-Terry model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eloList =<span class="st"> </span><span class="kw">buildModelsElo</span>(eloLogsAll, <span class="dv">2017</span>)</code></pre></div>
+</div>
+</div>
+<div id="predicting-results-with-bradley-terry-and-elo" class="section level2">
+<h2>Predicting Results with Bradley-Terry and Elo</h2>
+<p>Once we have our model outputs, we turn to predicting matchups between teams.</p>
+<div id="predicting-full-season-win-totals" class="section level3">
+<h3>Predicting Full Season Win Totals</h3>
+<p>Based on the winning probability matrix of one particular season, the total number of wins for each team can be projected using the <strong>projectSeasonWins</strong> function. This function takes a winning probability matrix that is generated either by the Bradley-Terry or the Elo model, and returns projected wins for each team in that season. The input winning probability matrix can be validated by checking if total wins for all teams fall into a reasonable range, roughly 20-65 wins per season, barring exceptional cases. Examples are the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">projectSeasonWins</span>(btList$WinProb)
+<span class="kw">projectSeasonWins</span>(eloList$WinProb)</code></pre></div>
+</div>
+<div id="predicting-playoff-series-outcomes" class="section level3">
+<h3>Predicting playoff series outcomes</h3>
+<p>With the availability of winning probability matrix, one can estimate the probability of each outcome of a matchup between two teams in a 7-game playoff series. This can be done using the <strong>playoffSeries</strong> function, which takes certain home and away teams and the winning probability matrix described above. Note that the “home team” specified here refers to the team having 4 home games in the 7-game series. The function returns a vector giving the probability of each playoff series outcome. An optional bar plot of playoff series outcomes ranging from home team wins in 4 games to away team wins in 4 games can be generated if the “plot” argument is set to TRUE. An example is the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">playoffSeries</span>(<span class="dt">prob =</span> btList$WinProb, <span class="dt">home =</span> <span class="st">&quot;CLE&quot;</span>, <span class="dt">away =</span> <span class="st">&quot;GSW&quot;</span>, <span class="dt">plot =</span> T)
+<span class="kw">playoffSeries</span>(<span class="dt">prob =</span> eloList$WinProb, <span class="dt">home =</span> <span class="st">&quot;CLE&quot;</span>, <span class="dt">away =</span> <span class="st">&quot;GSW&quot;</span>)</code></pre></div>
+</div>
+</div>
+<div id="contributions" class="section level2">
+<h2>Contributions</h2>
+<p>All data-collecting code was written by astroud. The Bradley-Terry model code was written almost entirely by kitliu5. Elo model code was written by astroud. Playoff series prediction and plotting code was written mainly by kitliu5, with minor edits and tweaks by astroud. Season prediction code was written by astroud, with debugging assistance from kitliu5. Documentation for each function was written by the author of the function, with both astroud and kitliu5 checking all the documentation for consistency and correctness. This report was drafted by kitliu5, and revised by astroud.</p>
+</div>
+<div id="extensions-and-future-additions" class="section level2">
+<h2>Extensions and Future Additions</h2>
+<div id="season-summary-statistics" class="section level3">
+<h3>Season Summary Statistics</h3>
+<p>While all of the models referenced above utilize game-by-game data to make their predictions, data with statistics aggregated across an entire season are also potentially of use.</p>
+<p>The function <strong>getSeasonStats</strong> allows users to extract NBA season data from Basketball-Reference.com. The argument “type” is used to specify the type of season data to be scraped: either data totaled for the entire season, averaged by game, or averaged by every 100 possessions. It also leaves users the freedom to cover any range of seasons by specifying the “from” and “to” arguments. As with <strong>getGameLogs</strong>, the default value of the argument “to” is the same as “from” so that single season statistics are extracted when the argument “to” is not specified. Examples are below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seasonStats2017_per100p =<span class="st"> </span><span class="kw">getSeasonStats</span>(<span class="dt">from =</span> <span class="dv">2017</span>, <span class="dt">type =</span> <span class="st">&quot;per 100 poss&quot;</span>)
+seasonStats2015to2017_totals =<span class="st"> </span><span class="kw">getSeasonStats</span>(<span class="dt">from =</span> <span class="dv">2015</span>, <span class="dt">to =</span> <span class="dv">2017</span>, <span class="dt">type =</span> <span class="st">&quot;totals&quot;</span>)</code></pre></div>
+<p>With this data, users are free to create their own models. While nbamodelR does not provide any functions for building models from season summary data, we encourage the exploration of which attributes are most likely to lead to high win totals, as well as which type of aggregated statistics are most informative.</p>
+</div>
+<div id="creating-an-elo-difference-matrix" class="section level3">
+<h3>Creating an Elo Difference Matrix</h3>
+<p>The 2017 Elo difference matrix can be built based on Elo ratings of all teams in 2017 extracted above. Each entry in this matrix represents the difference in Elo ratings between the team in that row and the team in that column. This can be done using the function <strong>buildEloDiffsMatrix</strong>. However, because the winning probability and point differential matrices are more directly related to predicting matchups, and the elo difference matrix is more of an intermediate result, we chose to have the function <strong>buildEloDiffsMatrix</strong> be internal. Still, users might find it potentially of use, and we would consider exporting it in future versions of the package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># eloDiffsMatrix = buildEloDiffsMatrix(elos2017)</span></code></pre></div>
+</div>
+<div id="providing-naming-consistency" class="section level3">
+<h3>Providing Naming Consistency</h3>
+<p>This section regards potential functionality that does not yet exist within this package, but could be useful, especially when dealing with multiple data sources. In certain cases, different websites use the same abbreviation to refer to multiple different teams, or multiple abbreviations for the same team. For instance, consider the NBA’s history in Charlotte: the Charlotte Hornets existed from 1988 to 2002, before moving to New Orleans. Then, the city of Charlotte was given a new NBA team, which competed as the Bobcats from 2004 to 2014, before renaming to the Hornets once again in 2014. FiveThirtyEight’s game logs refer to the 1988-2002 version of the team with the abbreviation “CHH”, and the 2004-2018 iteration as “CHO”. Note that depending on the year, “CHO” could refer to the Bobcats or the Hornets. Annoyingly, stats.nba.com uses “CHA” instead to refer to the Charlotte franchise from 2004 to 2018. The potential for user confusion here is large, but to be able to map abbreviations to names, we would need a comprehensive table with seasons, names, and abbreviations, which we did not have time to implement. Adding a function to convert a combination of season and abbreviation to the name of the team is one of our primary future goals.</p>
+</div>
+</div>
+<div id="conclusion" class="section level2">
+<h2>Conclusion</h2>
+<p>That’s all we have to share about our package! We hope that reading this was informative, and that you enjoy using nbamodelR.</p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
